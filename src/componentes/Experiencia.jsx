@@ -1,9 +1,10 @@
-function Experience(){
+function Experiencia({ empresa, cargo, años }) {
   return (
-    <section>
-      <h3>Experiencia</h3>
-      <p>Frontend Developer en WebTech (2023–2025)</p>
-    </section>
-  )
+    <div>
+      <h3>{empresa}</h3>
+      <p>{cargo}</p>
+      <span>{años}</span>
+    </div>
+  );
 }
-export default Experience
+export default Experiencia;
