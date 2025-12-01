@@ -1,11 +1,19 @@
+import React, { useState } from "react";
 import Header from "./componentes/Header";
 import Info from "./componentes/Info";
 import Educacion from "./componentes/Educacion";
 import Experiencia from "./componentes/Experiencia";
 import Habilidades from "./componentes/Habilidades";
 import Footer from "./componentes/Footer";
+import ToggleHabilidades from "./componentes/ToggleHabilidades";
 
 function App() {
+  const [habilidadesVisible, setHabilidadesVisible] = useState(false);
+
+  const toggleHabilidades = () => {
+    setHabilidadesVisible(!habilidadesVisible);
+  };
+
   return (
     <div className="container">
       <Header nombre="Juan M. Cardona M." cargo="Desarrollador Frontend" />
@@ -32,9 +40,15 @@ function App() {
         />
 
         <Experiencia empresa="N/A" cargo="Frontend Developer" años="N/A" />
-        <Habilidades
-          tecnologias={["React", "Node.js", "JavaScript", "HTML", "CSS"]}
+        <ToggleHabilidades
+          visible={habilidadesVisible}
+          onToggle={toggleHabilidades}
         />
+        {habilidadesVisible && (
+          <Habilidades
+            tecnologias={["React", "Node.js", "JavaScript", "HTML", "CSS"]}
+          />
+        )}
       </main>
       <Footer
         email="juanma3331@gmail.com"
