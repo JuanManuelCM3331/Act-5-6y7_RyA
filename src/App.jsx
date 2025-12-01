@@ -6,12 +6,18 @@ import Experiencia from "./componentes/Experiencia";
 import Habilidades from "./componentes/Habilidades";
 import Footer from "./componentes/Footer";
 import ToggleHabilidades from "./componentes/ToggleHabilidades";
+import FormularioTecnologia from "./componentes/FormularioTecnologia";
+import StackTecnologias from "./componentes/StackTecnologias";
+import { estudios, tecnologiasIniciales } from "./cvData";
 
 function App() {
   const [habilidadesVisible, setHabilidadesVisible] = useState(false);
+  const [tecnologias, setTecnologias] = useState(tecnologiasIniciales);
 
-  const toggleHabilidades = () => {
-    setHabilidadesVisible(!habilidadesVisible);
+  const toggleHabilidades = () => setHabilidadesVisible((v) => !v);
+
+  const agregarTecnologia = (nuevaTec) => {
+    setTecnologias((prev) => [...prev, nuevaTec]);
   };
 
   return (
@@ -24,30 +30,18 @@ function App() {
           ubicacion="Itagui, Antioquia, Colombia"
           descripcion="Apasionado por la tecnología, con experiencia en React, Node.js y desarrollo web moderno."
         />
-        <Educacion
-          estudios={[
-            {
-              titulo: "Tecnólogo en Análisis y Desarrollo de Software",
-              institucion: "SENA",
-              año: "2025",
-            },
-            {
-              titulo: "Tecnica en Operacion de Eventos",
-              institucion: "SENA",
-              año: "2024",
-            },
-          ]}
-        />
-
+        <Educacion estudios={estudios} />
         <Experiencia empresa="N/A" cargo="Frontend Developer" años="N/A" />
+
+        <FormularioTecnologia agregarTecnologia={agregarTecnologia} />
+        <StackTecnologias tecnologias={tecnologias} />
+
         <ToggleHabilidades
           visible={habilidadesVisible}
           onToggle={toggleHabilidades}
         />
         {habilidadesVisible && (
-          <Habilidades
-            tecnologias={["React", "Node.js", "JavaScript", "HTML", "CSS"]}
-          />
+          <Habilidades tecnologias={tecnologias} />
         )}
       </main>
       <Footer
@@ -59,5 +53,7 @@ function App() {
     </div>
   );
 }
+
+export default App;
 
 
